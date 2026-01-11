@@ -1,6 +1,6 @@
-# Welcome Nota
+# Welcome Nōto [ノート]'
 
-**Welcome Nota** is a simple note-taking and note-sharing application. It can also be described as a minimal digital letter app.
+**Nōto** is a simple note-taking and note-sharing application. It can also be described as a minimal digital letter app.
 
 The core idea is simplicity: users interact with a single textarea on the frontend to write notes and optionally share them with selected friends.
 
