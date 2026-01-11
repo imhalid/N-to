@@ -1,301 +1,171 @@
-Welcome to your new TanStack app! 
+# Welcome Nota
 
-# Getting Started
+**Welcome Nota** is a simple note-taking and note-sharing application. It can also be described as a minimal digital letter app.
 
-To run this application:
+The core idea is simplicity: users interact with a single textarea on the frontend to write notes and optionally share them with selected friends.
 
-```bash
-pnpm install
-pnpm dev
-```
+---
 
-# Building For Production
+## Application Flow
 
-To build this application for production:
+1. User creates an account
+2. User logs in
+3. Each user receives a unique **user code**
+4. Users can add others as friends using this code
+5. User creates a note
+6. User can share selected notes with friends
+7. Admin users can perform management operations
 
-```bash
-pnpm build
-```
+---
 
-## Testing
+## Planned Technology Stack
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+### Backend
 
-```bash
-pnpm test
-```
+* Java
+* Spring Boot
+* Spring Security
+* JWT (JSON Web Token)
+* JPA / Hibernate
+* PostgreSQL
 
-## Styling
+### Frontend
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+* React
+* Tanstack Start
+* Metro UI design approach
+* REST API integration
 
+---
 
-## Linting & Formatting
+## Backend Tasks
 
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
+### 1. Entity Design
 
+#### User Entity
 
-```bash
-pnpm lint
-pnpm format
-pnpm check
-```
+* [ ] id
+* [ ] username
+* [ ] email
+* [ ] password
+* [ ] userCode (unique, shareable)
+* [ ] role (USER, ADMIN)
+* [ ] createdAt
 
+#### Note Entity
 
+* [ ] id
+* [ ] content
+* [ ] owner (User)
+* [ ] isShared
+* [ ] createdAt
+* [ ] updatedAt
 
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
+#### Relationships
 
-### Adding A Route
+* [ ] User → Note (OneToMany)
+* [ ] User ↔ User (ManyToMany for friend system)
 
-To add a new route to your application just add another a new file in the `./src/routes` directory.
+---
 
-TanStack will automatically generate the content of the route file for you.
+### 2. Authentication & Authorization
 
-Now that you have two routes you can use a `Link` component to navigate between them.
+* [ ] Configure Spring Security
+* [ ] Implement JWT-based authentication
+* [ ] Login / Register endpoints
+* [ ] Token generation and validation
+* [ ] Role-based authorization
+  * [ ] USER
+  * [ ] ADMIN
 
-### Adding Links
+---
 
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+### 3. Backend API Task List
 
-```tsx
-import { Link } from "@tanstack/react-router";
-```
+#### Authentication
 
-Then anywhere in your JSX you can use it like so:
+* [ ] User registration endpoint
+* [ ] User login endpoint
+* [ ] JWT token generation
+* [ ] JWT validation filter
 
-```tsx
-<Link to="/about">About</Link>
-```
+#### User
 
-This will create a link that will navigate to the `/about` route.
+* [ ] Get user profile
+* [ ] Add friend using user code
+* [ ] Retrieve friend list
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
+#### Notes
 
-### Using A Layout
+* [ ] Create note
+* [ ] Update note
+* [ ] Delete note
+* [ ] List user notes
+* [ ] Share note with friends
 
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
+#### Admin
 
-Here is an example layout that includes a header:
+* [ ] List users
+* [ ] Delete users
+* [ ] Optional note moderation
 
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+---
 
-import { Link } from "@tanstack/react-router";
+## Frontend Tasks
 
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
+### 1. UI / UX
 
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
+* [ ] Research Metro UI design principles
+* [ ] Minimal screen structure
+* [ ] Single textarea–focused main screen
 
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
+---
 
+### 2. Pages
 
-## Data Fetching
+* [ ] Register
+* [ ] Login
+* [ ] Main screen (textarea + share options)
+* [ ] Friend list
+* [ ] Admin panel (admin only)
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
+---
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+### 3. Frontend Task List
 
-### React-Query
+* [ ] Metro UI component research
+* [ ] Base layout creation
+* [ ] Form components
+* [ ] Authentication flow (login/register)
+* [ ] Backend API integration
+* [ ] Token management (localStorage / context)
+* [ ] Authorization checks (admin/user)
 
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
+---
 
-First add your dependencies:
+## Minimal UI Principle
 
-```bash
-pnpm add @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
+* [ ] No complex menus
+* [ ] Main screen contains only:
+  * [ ] A textarea
+  * [ ] Share button
+  * [ ] Optional friend selector
 
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+**Goal:** write and share with no friction.
 
-// ...
+---
 
-const queryClient = new QueryClient();
+## Future Improvements (Optional)
 
-// ...
+* [ ] Note tagging
+* [ ] Read status
+* [ ] Scheduled notes
+* [ ] Dark / Light theme
+* [ ] Mobile responsiveness
 
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
+---
 
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
+## Notes
 
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-pnpm add @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+This project is designed for learning and experimentation.
+Its main purpose is to practice Spring Boot, Spring Security, and JWT-based authentication in a real but simple application.
