@@ -11,6 +11,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import {RouterProvider} from 'react-aria-components';
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
+import Layout from '../components/Layout'
 
 import appCss from '../styles.css?url'
 
@@ -38,7 +39,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'ノート - Nōto',
       },
     ],
     links: [
@@ -64,7 +65,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <Layout>
+          {children}
+        </Layout>
         <TanStackDevtools
           config={{
             position: 'bottom-right',
