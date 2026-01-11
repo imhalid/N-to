@@ -1,14 +1,10 @@
 import {
   HeadContent,
-  NavigateOptions,
   Scripts,
-  ToOptions,
   createRootRouteWithContext,
-  useRouter,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import {RouterProvider} from 'react-aria-components';
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import Layout from '../components/Layout'
@@ -17,12 +13,7 @@ import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
 
-declare module 'react-aria-components' {
-  interface RouterConfig {
-    href: ToOptions,
-    routerOptions: Omit<NavigateOptions, keyof ToOptions>
-  }
-}
+
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -54,11 +45,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  let router = useRouter();
   return (
-    <RouterProvider 
-        navigate={(href, opts) => router.navigate({...href, ...opts})}
-        useHref={href => router.buildLocation(href).href}>
 
     <html lang="en">
       <head>
@@ -83,6 +70,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-          </RouterProvider>
   )
 }

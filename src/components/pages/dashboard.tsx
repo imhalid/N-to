@@ -1,8 +1,5 @@
 import { useState } from "react"
-import { Button } from "../ui/Button"
-import { Label, TextArea, TextField} from 'react-aria-components';
 import './dashboard.css'
-import "../ui/TextField.css";
 
 const Dashboard = () => {
   const [message, setMessage] = useState('')
@@ -16,14 +13,11 @@ const Dashboard = () => {
   return (
     <div className="dashboard-form">
       <form onSubmit={handleSubmit}>
-        <TextField >
-            <Label>Comment</Label>
-                <TextArea
+                <textarea
                     rows={2}
                     className="react-aria-TextArea inset h-32"
                     placeholder="Enter a comment" />
-                </TextField>
-            <Button type="submit">Gönder</Button>
+            <button type="submit" style={{ marginLeft: '10px' }}>Metro Gönder</button>
       </form>
     </div>
   )
