@@ -1,4 +1,4 @@
-# Welcome Nōto [ノート]'
+# Welcome Nōto [ノート]
 
 **Nōto** is a simple note-taking and note-sharing application. It can also be described as a minimal digital letter app.
 

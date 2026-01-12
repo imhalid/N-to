@@ -1,8 +1,8 @@
 :root {
   /* Change this variable to set the theme color for all components. */
   /* You can use the below presets, or choose a custom color. */
-  --tint: var(--indigo);
-
+  --tint: var(--gray);
+  --border-radius: 0px;
   /* theme colors */
   /* lightness channel is only used as a multiplier for chroma (see below) */
   --gray: oklch(0.5 0 0);

@@ -10,10 +10,9 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import Layout from '../components/Layout'
 
 import appCss from '../styles.css?url'
+import theme from '../components/ui/theme.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
-
-
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -38,6 +37,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         rel: 'stylesheet',
         href: appCss,
       },
+      {
+        rel: 'stylesheet',
+        href: theme,
+      }
     ],
   }),
 
